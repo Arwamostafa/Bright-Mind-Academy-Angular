@@ -1,0 +1,170 @@
+.bg-facebook {
+  background-color: #3B5997; }
+
+.text-facebook {
+  color: #3B5997; }
+
+.bg-twiter {
+  background-color: #42C0FB; }
+
+.text-twiter {
+  color: #42C0FB; }
+
+.bg-dribble {
+  background-color: #EC4A89; }
+
+.text-dribble {
+  color: #EC4A89; }
+
+.bg-pinterest {
+  background-color: #BF2131; }
+
+.text-pinterest {
+  color: #BF2131; }
+
+.bg-youtube {
+  background-color: #E0291D; }
+
+.text-youtube {
+  color: #E0291D; }
+
+.bg-googleplus {
+  background-color: #C73E2E; }
+
+.text-googleplus {
+  color: #C73E2E; }
+
+.bg-instagram {
+  background-color: #AA7C62; }
+
+.text-instagram {
+  color: #AA7C62; }
+
+.bg-viber {
+  background-color: #7B519D; }
+
+.text-viber {
+  color: #7B519D; }
+
+.bg-amazon {
+  background-color: #000; }
+
+.text-amazon {
+  color: #000; }
+
+.bg-c-blue {
+  background-color: var(--primary); }
+
+.text-c-blue {
+  color: var(--primary); }
+
+.bg-c-pink {
+  background-color: var(--accent); }
+
+.text-c-pink {
+  color: var(--accent); }
+
+.bg-c-green {
+  background-color: #4680ff; }
+
+.text-c-green {
+  color: #4680ff; }
+
+.bg-c-yellow {
+  background-color: #FFB64D; }
+
+.text-c-yellow {
+  color: #FFB64D; }
+
+.bg-c-orenge {
+  background-color: #FE8A7D; }
+
+.text-c-orenge {
+  color: #FE8A7D; }
+
+.bg-c-lite-green {
+  background-color: #69CEC6; }
+
+.text-c-lite-green {
+  color: #69CEC6; }
+
+.card .card-bg-inverce {
+  background-color: #353C4E; }
+
+
+  .widget-card-1 .card1-icon {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    top: -15px;
+    font-size: 35px;
+    border-radius: 8px;
+    display: flex;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out; }
+  .widget-card-1 .card-block > span {
+    color: #919aa3; }
+  .widget-card-1 h4 {
+    font-weight: 400;
+    margin-top: 10px; }
+  .widget-card-1:hover .card1-icon {
+    top: -25px; }
+
+
+
+.widget-card-1 {
+  margin-top: 40px;
+  text-align: right;
+ }
+  .widget-card-1 .card1-icon {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    top: -37px;
+    font-size: 35px;
+    border-radius: 8px;
+    display: flex;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out; }
+  .widget-card-1 .card-block > span {
+    color: #919aa3; }
+  .widget-card-1 h4 {
+    font-weight: 400;
+    margin-top: 10px; }
+  .widget-card-1:hover .card1-icon {
+    top: -25px; }
+
+.card {
+  border-radius: 5px;
+  box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.12);
+  border: none;
+  margin-bottom: 30px;
+
+}
+.table > :not(caption) > * > *{
+    border-bottom-width:0px
+}
+
+.role-badge {
+            padding: 7px 15px;
+            border-radius: 25px;
+            font-size: 14px;
+            transition: all 0.3s;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            color: var(--text-white);
+        }
+
+.role-admin{
+    background-color: #FF6B9D;
+}
+.role-instructor{
+    background-color: var(--accent);
+}
+.role-student{
+    background-color: var(--primary);
+}

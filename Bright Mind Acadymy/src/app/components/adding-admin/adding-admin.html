@@ -1,0 +1,235 @@
+<!--SECTION - Add button  -->
+@if(AddButton){
+ <div class="my-3">
+<button class="btn-pri w-25" (click)="toggleAddAdminSection()"> <i class="fa-solid fa-user-plus mx-2 text-white"></i> Add New Admin</button>
+</div>   
+}
+
+<!--SECTION - Add Admin form   -->
+@if(OpenAddAdminSection){
+<div class="form-section">
+   <div class="form-header">
+             <button class="btn-close-panel" (click)="closeAddAdminSection()">
+                <i class="fas fa-times"></i>
+            </button>
+                <div class="form-icon">
+             <i class="fa-solid fa-user-tie"></i>               
+             </div>
+                <h2>Add New Admin</h2>
+                <p>Fill in the details below to create a new Admin</p>
+ </div>
+ <div class="alert-section  mx-auto" style="width: 90%;">
+   <div *ngIf="message" 
+       class="alert mt-3 w-100 mx-auto" 
+       [ngClass]="isSuccess ? 'alert-success' : 'alert-danger'">
+    {{ message }}
+  
+@if(!isSuccess && errors && (errors | keyvalue).length > 0){
+ <ul class="mb-0">
+      <li class="mt-2" *ngFor="let item of errors | keyvalue">
+        <strong>{{ item.key }}:</strong>
+        <ul>
+          <li *ngFor="let msg of getErrorMessages(item.value)">{{ msg }}</li>
+        </ul>
+      </li>
+    </ul>
+}
+</div> 
+ </div>
+ 
+
+ <form [formGroup]="AdminForm" (ngSubmit)="onSubmit()">
+    <div class="section-title">
+ <i class="fas fa-info-circle " style="color: var(--primary-dark);"></i>
+     Basic Information
+    </div>
+  <div class="row">
+    <div class="col-md-6">
+    <label for="firstName">First Name <span class="req">*</span></label>
+    <input type="text" id="firstName" formControlName="firstName" />
+    <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)">
+        <div *ngIf="firstName?.errors?.['required']">
+            <p style="color: brown;">First name is required.</p>
+        </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <label for="lastName">Last Name <span class="req">*</span></label>
+    <input type="text" id="lastName" formControlName="lastName" />
+    <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)">
+        <div *ngIf="lastName?.errors?.['required']">
+            <p style="color: brown;">Last name is required.</p>
+        </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <label for="nationalId">National Id <span class="req">*</span></label>
+    <input type="number" id="nationalId" formControlName="nationalId" />
+    <div *ngIf="nationalId?.invalid && (nationalId?.dirty || nationalId?.touched)">
+        <div *ngIf="nationalId?.errors?.['required']">
+            <p style="color: brown;">National Id is required.</p>
+        </div>
+        <div *ngIf="email?.errors?.['pattern']">
+            <p style="color: brown;">National Id is Invalid </p>
+        </div>
+    </div>
+  </div>
+
+    <div class="col-md-6">
+        <label for="phoneNumber">Phone Number <span class="req">*</span></label>
+        <input type="text" id="phoneNumber" formControlName="phoneNumber" />
+        <div *ngIf="phoneNumber?.invalid && phoneNumber?.touched">
+            <p style="color: brown;">Phone is required and must be a valid 10-digit number</p>
+        </div>
+    </div>
+
+  <div class="col-md-6">
+    <label for="email">Email <span class="req">*</span></label>
+    <input type="email" id="email" formControlName="email" />
+    <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+        <div *ngIf="email?.errors?.['required']">
+            <p style="color: brown;">Email is required.</p>
+        </div>
+        <div *ngIf="email?.errors?.['pattern']">
+            <p style="color: brown;">Invalid email format</p>
+        </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+      <label for="password">Password <span class="req">*</span></label>
+      <input type="password" id="password" formControlName="password" /> 
+      <div class="col-md-6" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+      <div *ngIf="password?.errors?.['required']">
+          <p style="color: brown;">Password is required.</p>
+      </div>
+      <div *ngIf="password?.errors?.['pattern']">
+          <p style="color: brown;">Password must include letters, numbers, and special characters, and must not contain spaces, and minimum length 8 characters </p>
+      </div>
+  </div>
+  </div>
+ 
+</div>
+  
+
+    <button *ngIf="editId == null" type="submit" style="margin-top: 20px; width: 100%; background: var(--button-pri-color);">Add</button>
+    <button *ngIf="editId != null" type="submit" style="margin-top: 20px; width: 100%; background: var(--button-pri-color);;">Update</button>
+
+</form>
+</div>
+}
+<!--SECTION - admins table  -->
+<div class="d-flex justify-content-center">
+<table style="width: 85%; " class="table table-striped ">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th style="text-align: center;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let admin of admins">
+            <td>{{ admin.firstName }}</td>
+            <td>{{ admin.lastName }}</td>
+            <td>{{ admin.email }}</td>
+            <td class="actions d-flex justify-content-center">
+                <button (click)="toggleDetails(admin)" class="btn-pri mx-2"><i class="fa-solid fa-eye"></i></button>
+                <button (click)="Update(admin.id)" class="Update mx-2"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button (click)="Delete(admin.id)" class="mx-2" style="background-color: brown"><i class="fa-solid fa-trash"></i></button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<!-- SECTION - Admin Details -->
+@if(selectedUser){
+<section  class=" mt-5 ">
+<div class="details-panel mt-5" >
+        <div class="panel-header">
+            <h2 class="panel-title">User Details</h2>
+            <button class="btn-close-panel" (click)="closeDetails()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="panel-hero">
+            <div class="hero-code" id="panelCode">{{selectedUser.fullName}}</div>
+        </div>
+
+        <div class="details-section">
+            <div class="section-title">
+                <i class="fas fa-list"></i>
+                Admin Information
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                  <div class="detail-item">
+                <div class="detail-left">
+                    <div class="detail-icon">
+                        <i class="fa-solid fa-id-card-clip"></i>
+                    </div>
+                    <div class="detail-info">
+                        <h6>ID</h6>
+                        <p id="panelStudents">{{selectedUser.id}}</p>
+                    </div>
+                </div>
+                   </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                <div class="detail-item">
+                    <div class="detail-left">
+                       <div class="detail-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                       </div>
+                       <div class="detail-info">
+                        <h6>Email</h6>
+                        <p id="panelStudents">{{selectedUser.email}}</p>
+                       </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12">
+                    <div class="detail-item">
+                <div class="detail-left">
+                    <div class="detail-icon">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div class="detail-info">
+                        <h6>Phone Number</h6>
+                        <p>{{selectedUser.phoneNumber}}</p>
+                    </div>
+                </div>
+            </div>
+                </div>
+               
+                
+             
+                <div class="col-md-6 col-sm-12">
+                    <div class="detail-item">
+                <div class="detail-left">
+                    <div class="detail-icon">
+                    <i class="fa-solid fa-id-card-clip"></i>
+                    </div>
+                    <div class="detail-info">
+                        <h6>National Id</h6>
+                        <p>{{selectedUser.nationalId}}</p>
+                    </div>
+                </div>
+            </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+  
+</section>
+}
+

@@ -1,0 +1,101 @@
+@if(isHomePage){
+<nav class="navbar nav navbar-expand-lg t bg-white  " style="background-color: #f0f4f900 !important;" [ngClass]="{ 'navbar-fixed': isNavbarFixed }">
+        <div class="container">
+            <a class="logo d-flex  align-items-center" href="#">
+                <div class="logo-icon d-flex justify-content-center align-items-center"> 
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9ZM17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z"/></svg>
+                </div>
+                <div class="logo-text d-flex flex-column">
+                    <span class="logo-main">Bright Mind</span>
+                    <span class="logo-sub" [ngClass]="{ 'logo-sub-fixed': isNavbarFixed }">ACADEMY</span>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+
+                    <li class="nav-item">
+                      <a class="nav-link"  routerLink="/home" [ngClass]="{ 'nav-link-Fixed': isNavbarFixed }">Home</a>
+                    </li>
+                     <li class="nav-item"  >
+                      <a class="nav-link"   [ngClass]="{ 'nav-link-Fixed': isNavbarFixed }">courses</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#" [ngClass]="{ 'nav-link-Fixed': isNavbarFixed }">Contact</a>
+                    </li>
+                    <li class="nav-item " *ngIf="_authSer.isInstructorLogged() && !_authSer.isAdminLogged() && !_authSer.isStudentLogged()">
+                      <a class="nav-link" routerLink="/instructor" href="#" [ngClass]="{ 'nav-link-Fixed': isNavbarFixed }">Instructor Dashboard</a>
+                    </li>
+                    <li class="nav-item " *ngIf="!_authSer.isInstructorLogged() && _authSer.isAdminLogged() && !_authSer.isStudentLogged()">
+                      <a class="nav-link" routerLink="/admin/main-dashboard" href="#" [ngClass]="{ 'nav-link-Fixed': isNavbarFixed }">Admin Dashboard</a>
+                    </li>
+                    <li class="nav-item ms-3" *ngIf="!_authSer.isInstructorLogged() && !_authSer.isAdminLogged() && !_authSer.isStudentLogged()">
+                      <button class="btn btn-register" routerLink="/register">Sign Up</button>
+                    </li>
+                    <li class="nav-item ms-3" *ngIf="!_authSer.isInstructorLogged() && !_authSer.isAdminLogged() && !_authSer.isStudentLogged()">
+                      <button class="btn btn-register"routerLink="/login">Sign In</button>
+                    </li>
+                    <li class="nav-item ms-3" *ngIf="_authSer.isInstructorLogged() || _authSer.isAdminLogged() || _authSer.isStudentLogged()">
+                      <button class="btn btn-register" routerLink="/home" (click)="logout()">Log Out</button>
+                    </li>
+                    <li class="nav-item ms-3" *ngIf="_authSer.isInstructorLogged() || _authSer.isAdminLogged() || _authSer.isStudentLogged()">
+          <a routerLink="/profile">
+            <img src="profile.png"  style="border-radius: 50% ; height: 50px; width: 50px;" alt="Profile">
+          </a>
+        </li> 
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+}@else {
+  <nav class="navbar navbar-expand-lg  bg-white static-nav "  [ngClass]="{ 'navbar-fixed': isNavbarFixed }">
+        <div class="container">
+            <a class="logo d-flex  align-items-center" href="#">
+                <div class="logo-icon d-flex justify-content-center align-items-center"> 
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9ZM17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z"/></svg>
+                </div>
+                <div class="logo-text d-flex flex-column">
+                    <span class="logo-main">Bright Mind</span>
+                    <span class="logo-sub" style="color: var(--heading-dark);" [ngClass]="{ 'logo-sub-fixed': isNavbarFixed }">ACADEMY</span>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center" style="color: var(--primary);">
+
+                    <li class="nav-item">
+                      <a class="nav-link"  routerLink="/home" [ngClass]="{ 'nav-link-Fixed': isNavbarFixed }">Home</a>
+                    </li>
+                     <li class="nav-item"  >
+                      <a class="nav-link"   [ngClass]="{ 'nav-link-Fixed': isNavbarFixed }">courses</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#" [ngClass]="{ 'nav-link-Fixed': isNavbarFixed }">Contact</a>
+                    </li>
+                    <li class="nav-item " *ngIf="_authSer.isInstructorLogged() && !_authSer.isAdminLogged() && !_authSer.isStudentLogged()">
+                      <a class="nav-link" routerLink="/instructor" href="#" [ngClass]="{ 'nav-link-Fixed': isNavbarFixed }">Instructor Dashboard</a>
+                    </li>
+                    <li class="nav-item " *ngIf="!_authSer.isInstructorLogged() && _authSer.isAdminLogged() && !_authSer.isStudentLogged()">
+                      <a class="nav-link" routerLink="/admin" href="#" [ngClass]="{ 'nav-link-Fixed': isNavbarFixed }">Admin Dashboard</a>
+                    </li>
+                    <li class="nav-item ms-3" *ngIf="!_authSer.isInstructorLogged() && !_authSer.isAdminLogged() && !_authSer.isStudentLogged()">
+                      <button class="btn btn-register" routerLink="/register">Sign Up</button>
+                    </li>
+                    <li class="nav-item ms-3" *ngIf="!_authSer.isInstructorLogged() && !_authSer.isAdminLogged() && !_authSer.isStudentLogged()">
+                      <button class="btn btn-register"routerLink="/login">Sign In</button>
+                    </li>
+                    <li class="nav-item ms-3" *ngIf="_authSer.isInstructorLogged() || _authSer.isAdminLogged() || _authSer.isStudentLogged()">
+                      <button class="btn btn-register" routerLink="/home" (click)="logout()">Log Out</button>
+                    </li>
+                    <li class="nav-item ms-3" *ngIf="_authSer.isInstructorLogged() || _authSer.isAdminLogged() || _authSer.isStudentLogged()">
+          <a routerLink="/profile">
+            <img src="profile.png"  style="border-radius: 50% ; height: 50px; width: 50px;" alt="Profile">
+          </a>
+        </li> 
+                </ul>
+            </div>
+        </div>
+    </nav>
+}
+   

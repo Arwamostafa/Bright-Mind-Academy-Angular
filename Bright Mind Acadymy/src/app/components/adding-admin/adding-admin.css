@@ -1,0 +1,182 @@
+/*? Header of Form */
+
+form {
+  padding: 20px 30px 30px 30px ;
+}
+.form-section {
+  width: 100%;
+  margin: 20px auto;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
+}
+
+.form-header {
+  background: var(--button-pri-color);
+  padding: 40px;
+  color: white;
+  text-align: center;
+  border-radius: 15px 15px 0px 0px;
+}
+
+.form-header h2 {
+  margin: 0 0 10px 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-white);
+}
+
+.form-header p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 16px;
+  color: var(--text-white);
+}
+
+.form-icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 35px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e9ecef;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title i {
+  color: var(--accent);
+}
+
+/* ! style of inputs */
+form div {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+input[type="number"],
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border 0.3s ease;
+}
+.req {
+  color: #ea4d5c;
+}
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background-color: #f0faff;
+}
+
+.table button , .form-section button {
+  /* width: 100%; */
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: var(--button-pri-color);
+  border: none;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+table button:hover:enabled  , .form-section button:hover:enabled{
+  background-color: var(--primary-light);
+}
+
+table button:disabled  , .form-section button:disabled{
+  background-color: #c0c0c0;
+  cursor: not-allowed;
+}
+
+div.ng-invalid.ng-touched input {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+}
+/*~ Table layout */
+table {
+  
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 32px;
+  font-family: Arial, sans-serif;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background-color: white;
+}
+
+th,
+td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+thead {
+  background: var(--button-pri-color);
+  color: #ffffff;
+}
+
+tbody tr:hover {
+  background-color: #f9fbff;
+}
+
+
+
+/*~ Update button */
+button:first-child {
+  background-color: var(--primary);
+  color: white;
+}
+
+button:first-child:hover {
+  background-color: var(--primary-light);
+}
+.actions .Update{
+
+  background-color: var(--accent);
+}
+.actions .Update:hover{
+
+  background-color: var(--accent-dark);
+}
+/*! Delete button */
+table button:last-child  , .form-section button:last-child{
+  background-color: #0066cc;
+  color: white;
+}
+
+.alert {
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+

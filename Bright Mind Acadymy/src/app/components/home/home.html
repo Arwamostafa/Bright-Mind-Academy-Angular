@@ -1,0 +1,565 @@
+<!--# ----------------------------------------------------------------------- -->
+<!--#---------------------------- Start Header ----------------------------- -->
+<!--#----------------------------------------------------------------------- -->
+<div class="jumbotron jumbotron-fluid position-relative overlay-bottom"
+  style="margin-bottom: 10px; background-color: #f9f9f9">
+  <div class="container my-5 d-flex justify-content-center" style="color: rgba(255, 255, 255, 0.95);">
+    <!--! content of header  -->
+    <div class="content-of-header w-50  text-center">
+      <h1 class="fw-bold head my-2 f" style="color: rgba(255, 255, 255, 0.95);" >
+        Learn Better,
+        Shine Brighter!
+      </h1>
+      <p class="my-4 text-of-header" style="color: rgba(255, 255, 255, 0.95)">
+        Your smart companion through high school. Interactive lessons, video
+        tutorials, and practice assignments designed for you.
+      </p>
+      <div class="d-sm-flex d-lg-block d-md-block flex-sm-wrap gap-3 mt-5 r justify-content-sm-center">
+        <!-- <a href="#" class="btn-pri text-decoration-none d-inline-block border-0" >Explore Subjects</a> -->
+        <a href="#" class="btn-sec text-decoration-none d-inline-block" routerLink="/login">Get Started Now!</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--# ----------------------------------------------------------------------- -->
+<!--# End Header -->
+<!--# ----------------------------------------------------------------------- -->
+
+<!--! ----------------------------------------------------------------------- -->
+<!--!--------------------------- Start Subjects --------------------- -->
+<!--!----------------------------------------------------------------------- -->
+
+
+<div class="justify-content-center pt-1 container ">
+  <div class="text-center position-relative mb-4 row">
+    <!--`  title of subject section -->
+   <div class=" W-25 text-center mt-5">
+      <h1 class="px-3 heading-underline heading-underline-2 mt-3 mb-4">
+        Top <span style="color: var(--primary)">Subjects</span>
+      </h1>
+    </div>
+
+    <!-- ` cards of subject -->
+
+    <div class="section bg-light">
+      <div class="container py-5">
+        <div class="row g-5">
+          @for(subject of subjects; track subject.subjectId){
+          <div class="col-md-6 col-sm-12 col-lg-4 col-11">
+            
+            <div class="cardd" [routerLink]="['/details',subject.subjectId]">
+              <div class="card-image" style="
+                  --l: #0000 0% 25%, #a5d8ff19 0%, #74c0fc32, #4dabf74b,
+                    #339af064, #1c7ed67f 50%;
+                ">
+                <span class="card-badge" [ngClass]="{
+              'general':subject.trackName==='General',
+              'math':subject.trackName==='Science – Math',
+              'literary':subject.trackName==='Literature ',
+              'bio':subject.trackName==='Science – Bio',
+              'secince':subject.trackName==='Science',
+              
+            }">{{subject.trackName}}</span>
+
+                <img [src]="subject.imgUrl" [alt]="subject.subjectName" />
+              </div>
+              <div class="card-text">
+                <p class="card-category">{{subject.className}}</p>
+                <h2 class="card-title">{{subject.subjectName}}</h2>
+
+                <div class="card-meta">
+                  <div class="meta-item">
+                    <svg class="meta-icon" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" />
+                    </svg>
+                    @if(subject.unitCount==0){
+                    <span>Coming Soon</span>
+                    }@else {
+                    <span>{{subject.unitCount}} Sections</span>
+                    }
+                  </div>
+                  <div class="meta-item">
+                    <svg class="meta-icon" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                    </svg>
+                    <span>{{subject.instructorName}}</span>
+                  </div>
+                  <!-- <div class="meta-item">
+                        <svg class="meta-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                        <span>{{subject.}}</span>
+                    </div> -->
+                  <button class="card-btn" onclick="alert('سيتم توجيهك لصفحة التسجيل')">
+                    Enroll Now
+                  </button>
+                </div>
+              </div>
+              <div class="card-price mt-3">
+                {{subject.subjectPrice| currency: " EGP "}}
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-md-6 col-lg-4" [routerLink]="['/details',subject.subjectID]">
+
+                <div class="card-compact">             
+                       <div class="jumbotron jumbotron-fluid position-relative overlay-bottom" >
+
+                    <img [src]="" [alt]="subject.subjectName" class="compact-image">
+                   </div> 
+                   <div class="compact-content">
+                        <div class="compact-header">
+                            <div class="compact-category">{{subject.className}} - {{subject.trackName}}</div>
+                           
+                        </div>
+                        <h3 class="compact-title">{{subject.subjectName}}</h3>
+                        <p class="compact-teacher">{{subject.instructorName}}</p>
+                        <div class="compact-meta">
+                            <div class="compact-meta-item">
+                                <i class="fas fa-book-open me-2"></i> 45 Lessons
+                            </div>
+                            <div class="compact-meta-item">
+                                <i class="fas fa-users ms-2"></i> 320 Students
+                            </div>
+                        </div>
+                        <div class="compact-footer">
+                            <div class="compact-price">{{subject.price}} <span>EGP/mo</span></div>
+                           
+                             <button class="btn-enroll">
+                                Enroll Now <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+          <!-- <div class="col-lg-4 col-md-6 col-sm-12" [routerLink]="['/details',subject.subjectId]">
+                    <div class="card card-style-3-bs text-white border-0 shadow-sm overflow-hidden rounded-4" style="cursor: pointer ;">
+                        <img [src]="subject.imgUrl" class="card-img"  [alt]="subject.subjectName">
+                        <div class="card-img-overlay d-flex flex-column justify-content-end p-4">
+                          <div class="corner-badges">
+                        <span class="grade-badge">Grade 10</span>
+                        <span class="track-badge track-math">علمي رياضة</span>
+                    </div>
+                           <div class="price-badge-top">
+                        <div class="price-amount"> {{subject.subjectPrice|currency: " EGP "}}  </div>
+                    </div>
+                            <span class="badge badge-custom align-self-start">{{subject.instructorName}}</span>
+                            <div class="me-auto">
+                                <h3 class="card-title mt-1 mx-0 d-flex  align-self-start">{{subject.subjectName}}</h3>
+                            <p class="card-text">{{subject.subjectDescription | truncateWords:5}}</p>
+                            </div>
+                          
+                            <div class="pt-1  w-100">
+                               <!-- <button class="btn-pri    " [routerLink]="['/details',subject.subjectId]">Details</button>
+                                 <div class="subject-meta-style3 pt-2">
+                            <div class=" gap-1 d-flex">
+                                <span class="subject-stat"> <i class="fa-solid fa-circle-play fs-5 me-2" style="color: #f0f4f9; border: 3px solid #007bff; border-radius: 50%;"></i> 32 Lessons</span>
+                                <span class="subject-stat">⭐ 4.9</span> 
+                            </div>
+                            <button class="btn-pri   px-lg-3 py-lg-2 py-lg-2 py-sm-1 ms-lg-auto " >Enroll now</button>
+                        </div>
+                               
+                              </div>
+                        </div>
+                    </div>
+                </div> -->
+          }
+
+          <!-- <div class="py-2 d-flex justify-content-end">
+            <button class="btn-pri" type="submit">More Subjects</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="justify-content-center pt-5 container">
+  <div class="section-title text-center position-relative mb-4 row"> -->
+<!-- <h1 class="display-5 mb-5" style="color: #0066cc; font-weight: bold ;">Explore Subjects</h1> -->
+
+<!-- <div class="d-flex"> -->
+<!-- <select
+          class="form-select mx-3 p-3"
+          style="font-size: 20px"
+          [(ngModel)]="selectedClassId"
+          (change)="loadData()"
+        >
+          <option [ngValue]="null" disabled>Select the academic year</option>
+
+          @for(c of classes; track c.classID ){
+          <option [value]="c.classID">{{ c.className }}</option>
+          }
+        </select> -->
+
+<!-- <select
+          class="form-select mx-3 p-3"
+          style="font-size: 20px"
+          [(ngModel)]="selectedTrackId"
+          (change)="loadData()"
+        >
+          <option [ngValue]="null" disabled>Select the academic track</option> -->
+<!--~ <option *ngFor="let t of tracks" [value]="t.trackID">{{ t.trackName }}</option> -->
+<!-- @for(t of tracks; track t.trackID){
+          <option [value]="t.trackID">{{ t.trackName }}</option>
+          }
+        </select> -->
+
+<!-- <div *ngIf="cardData">
+                <div class="card">
+                  <h3>{{ cardData.instructorName }}</h3>
+                  <p>Subject: {{ cardData.subjectName }}</p>
+                  <p>Price: {{ cardData.price | currency }}</p>
+                  <p>Class: {{ cardData.className }}</p>
+                  <p>Track: {{ cardData.trackName }}</p>
+              </div> -->
+<!-- <select class="form-select mx-3 p-3" style="font-size: 20px;" [(ngModel)]="SelectedAcademicYear">
+                <option [ngValue]="0" disabled>Select the academic year</option>
+                <option [ngValue]="1">First Year (Secondary)</option>
+                <option [ngValue]="2">Second Year (Secondary)</option>
+                <option [ngValue]="3">Third Year (Secondary)</option>
+              </select>
+
+              <select class="form-select mx-3 p-3" style="font-size: 20px;">
+
+                @switch (SelectedAcademicYear) {
+                  @case (1) {
+                    <option [ngValue]="0" disabled selected>Select the academic track</option>
+                    <option [ngValue]="1">General</option>
+                  }
+                  @case (2) {
+                    <option [ngValue]="0" disabled selected>Select the academic track</option>
+                    <option [ngValue]="1">Science</option>
+                    <option [ngValue]="2">Literature</option>
+                  }
+                  @case (3) {
+                    <option [ngValue]="0" disabled selected>Select the academic track</option>
+                    <option [ngValue]="1">Science-Mathematics</option>
+                    <option [ngValue]="2">Science-Biology</option>
+                    <option [ngValue]="3">Literature</option>
+                  }
+                } -->
+
+<!-- <option [ngValue]="0" disabled>Select the academic track</option>
+
+                First Year
+                <option *ngIf="SelectedAcademicYear == 1" [ngValue]="1">General</option>
+
+                Second Year
+                <ng-container *ngIf="SelectedAcademicYear == 2">
+                  <option [ngValue]="1">Science</option>
+                  <option [ngValue]="2">Literature</option>
+                </ng-container>
+
+                Third Year
+                <ng-container *ngIf="SelectedAcademicYear == 3">
+                  <option [ngValue]="1">Science-Mathematics</option>
+                  <option [ngValue]="2">Science-Biology</option>
+                  <option [ngValue]="3">Literature</option>
+                </ng-container> -->
+<!-- </select> -->
+<!-- </div> -->
+<!-- </div> -->
+
+<!-- <div class="row row-gap-5 my-5"> -->
+
+<!-- @for(subject of subjects; track subject.subjectID){
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-3 justify-content-center d-flex" [routerLink]="['/details',subject.subjectID]">
+              <div class="card hover-move" style="width: 17rem;">
+                <div class="image-wrapper" style="cursor: pointer;" >
+                  <!-- <img [src]="subject.imgUrl" class="card-img-top" alt="physics"/> -->
+<!-- </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{subject.instructorName}}</h5>
+                  <h5 class="card-text">{{subject.subjectName}}</h5>
+                  <h5 class="card-text">{{subject.price| currency: " EGP "}}</h5> -->
+<!-- <button class="btn btn-light" style="color: white; background-color: #0066cc;">Join Now</button> -->
+<!-- </div>
+              </div>
+            </div>
+          } -->
+<!-- @for(subject of subjects; track subject.subjectId){
+      <div
+        class="col-12 col-sm-6 col-lg-4 col-xl-3 justify-content-center d-flex"
+        [routerLink]="['/details',subject.subjectId]"
+      >
+        <div class="card hover-move" style="width: 17rem">
+          <div class="image-wrapper" style="cursor: pointer">
+            <img
+              [src]="subject.imgUrl"
+              class="card-img-top"
+              [alt]="subject.subjectName"
+            />
+          </div>
+          <div class="card-body">
+            <h5 class="card-text">{{subject.subjectName}}</h5>
+            <h5 class="card-title">{{subject.instructorName}}</h5>
+            <h5 class="card-text">
+              {{subject.subjectPrice | currency: " EGP "}}
+            </h5> -->
+<!--~ <button class="btn btn-light" style="color: white; background-color: #0066cc;">Join Now</button> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- } -->
+<!-- </div> -->
+<!-- </div> -->
+<!--! ----------------------------------------------------------------------- -->
+<!--! ---------------------------- End Subjects ----------------------------- -->
+<!--! ----------------------------------------------------------------------- -->
+
+<!--` ----------------------------------------------------------------------- -->
+<!--` -------------------------- Start Categories --------------------------- -->
+<!--` ----------------------------------------------------------------------- -->
+ <div class="ag-format-container mb-5  position-relative"> 
+  <div class="layer2" style="z-index: 1;">
+    <img src="bg-eye-care.png" alt="" class="w-100">
+  </div>
+  <div class="mt-2 W-25 text-center position-relative"  >
+      <h1 class="px-3 heading-underline heading-underline-2  mb-4">
+         Classes
+      </h1>
+    </div>
+   
+  <div class="container position-relative" style="z-index: 2;">
+
+  <div class="ag-courses_box">
+    @for (item of classes; track item.classID) {
+    <div class="ag-courses_item">
+      <a href="#" class="ag-courses-item_link" style="text-decoration: none;">
+        <div class="ag-courses-item_bg" [ngClass]="{
+          'ag-courses-item_bg1': item.className==='First Secondary',
+          'ag-courses-item_bg2':item.className==='Second Secondary',
+          'ag-courses-item_bg3':item.className==='Third Secondary'
+        }"></div>
+
+        <div class="ag-courses-item_title">
+          {{item.className}}
+        </div>
+
+        <div class="ag-courses-item_date-box">
+          Start:
+          <span class="ag-courses-item_date">
+            04.11.2022
+          </span>
+        </div>
+      </a>
+    </div>
+
+  }
+
+    
+
+ 
+
+  </div>
+</div>
+  </div>
+<!--` ----------------------------------------------------------------------- -->
+<!--` -------------------------- End Categories --------------------------- -->
+<!--` ----------------------------------------------------------------------- -->
+
+<!--? ----------------------------------------------------------------------- -->
+<!--?SECTION About Us -->
+<!--? ----------------------------------------------------------------------- -->
+
+<section class="About w-100 mt-5">
+  <!--@ layer  -->
+  <div class="layer ">
+    <img src="doctors-bg.png" alt="" class="w-100 ">
+  </div>
+  
+  <div class="container About-content">
+    <!-- @ haed of section -->
+    <div class="mt-5 W-25 text-center">
+      <h1 class="px-3 heading-underline heading-underline-2">
+        ABOUT <span style="color: var(--primary)">US</span>
+      </h1>
+    </div>
+    <!--@ sections of about us section  -->
+    <div class="row align-items-center ">
+      <!-- @ first section -->
+      <div class="col-md-5 order-lg-1 mb-5 mb-lg-0  ">
+        <img class="fit-cover student ms-5" src="AP-Banner-Student.png" alt="..." />
+      </div>
+      <!--@ seconed section  -->
+      <div class="col-md-7 text-center text-md-start mt-5" style="vertical-align: middle">
+        <div class="mx-auto">
+          <h3 class="mb-4 fw-bold fs-4" >
+            your trusted companion in secondary education
+          </h3>
+          <p style="font-size: 1.1rem;">You can use this space to highlight your platform’s main value or feature.
+          It can also include an image or illustration beside a few key points
+        </p>
+          
+          <div style="
+              display: flex;
+              align-items: center;
+              gap: 10px;
+            ">
+            <i class="fs-3 fa-solid fa-user-graduate mx-3 p-3 rounded-3" style="color: #6b5fb5; font-size: 1.5rem ; background-color:#f0eefb   ;"></i>
+            <p >
+             <strong style="font-size: 1.1rem;">Empower Every Student</strong>
+             <br>
+Support high school learners across all three years and help them build confidence for the future.   
+            </p>
+       </div >
+
+          <div style="
+              display: flex;
+              align-items: center;
+              gap: 10px;
+            ">
+            <i class="fs-3 fa-solid fa-book-open mx-3 p-3 rounded-3" style="color: #6b5fb5; font-size: 1.5rem ; background-color:#f0eefb  ;"></i>
+            <p >
+             <strong style="font-size: 1.1rem;">Personalized Learning Paths</strong>
+             <br>
+Offer tailored resources for each track — Science–Math, Science–Biology, and Literature — to match every learning style.            </p>
+       </div >
+
+          <div style="
+              display: flex;
+              align-items: center;
+              gap: 10px;
+            ">
+            <i class="fs-3 fa-solid fa-lightbulb mx-3 p-3 rounded-3" style="color: #6b5fb5; font-size: 1.5rem ; background-color:#f0eefb  ;"></i>
+            <p >
+             <strong style="font-size: 1.1rem;">Connect with Expert Teachers</strong>
+             <br>
+Engage students through experienced, passionate educators who make every lesson meaningful.            </p>
+       </div >
+         
+          <div class="pb-3 mt-4 ms-3">
+            <button class="btn-pri w-50" type="submit">Learn more</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--? ----------------------------------------------------------------------- -->
+<!--? End About Us -->
+<!--? ----------------------------------------------------------------------- -->
+
+
+<!--~ ----------------------------------------------------------------------- -->
+ <!--~ ---------------------------- Start Service ---------------------------- -->
+<!--~ ----------------------------------------------------------------------- -->
+
+
+
+<div class="jumbotronn position-relative overlay-bottomm overlay-topp"style="margin-bottom: 10px; background-color: #e8e4f3">
+  <div class="layerr">
+    <img src="dot-bg.png" alt="" >
+  </div>
+  <div class=" mb-3 W-25 text-center" style="position: relative; z-index: 4;">
+      <h1 class="px-3 heading-underline heading-underline-2 mb-4 " >
+        Learn Smarter with  <span style="color: var(--primary)">Our Support</span>
+      </h1>
+    </div>
+  <div class="container" style="color: #f0f4f9">
+    <div class="content-of-header row g-5 text-center">
+     <div class="col-md-4 ">
+        <div class="d-flex justify-content-center">
+          <img src="Teaching-cuate (1) 1.png" alt="" class="w-50 " >
+        </div>
+        <div >
+          
+             <p class="fs-5 title-of-serviceContent "><strong>Continuous Student Tracking</strong></p>
+             <div class="d-flex justify-content-center ">
+          <p class="w-75">We provide regular follow-ups through quizzes and assignments for every lesson — ensuring each student fully understands before moving forward.</p>
+          </div>
+         
+        </div>
+     </div>
+     <div class="col-md-4 ">
+        <div class="d-flex justify-content-center">
+          <img src="Webinar-rafiki 1 .png" alt="" class="w-50">
+        </div>
+        <div>
+          <p class="fs-5 title-of-serviceContent ">
+            <strong >Direct Communication with Instructors</strong></p>
+            <div class="d-flex justify-content-center description-of-service">
+       <p class="w-75">Students can easily communicate with their instructor through the subject’s group and join live meetings whenever the instructor starts one.</p>
+       </div>    
+      </div>
+     </div>
+     <div class="col-md-4 ">
+        <div class="d-flex justify-content-center">
+          <img src="Kids Studying from Home-rafiki 1.png" alt=""class="w-50">
+        </div>
+        <div>
+          <p class="fs-5 title-of-serviceContent" >
+            <strong>Easy Access to Learning Resources</strong></p>
+          <div class="d-flex justify-content-center description-of-service">
+          <p class="w-75">All the materials shared by instructors — notes, files, and resources — can be downloaded easily and accessed anytime.</p>
+        </div>
+     </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!--~ ----------------------------------------------------------------------- -->
+ <!--~ ----------------------------   end Service ---------------------------- -->
+<!--~ ----------------------------------------------------------------------- -->
+
+<!--// ----------------------------------------------------------------------- -->
+<!--// -------------------------- Start contact us --------------------------- -->
+<!--// ----------------------------------------------------------------------- -->
+
+<section class="About w-100 mt-5">
+  <!--@ layer  -->
+  <div class="layer">
+    <img src="doctors-bg.png" alt="" class="w-100">
+  </div>
+  
+  <div class="container About-content">
+    <!-- @ haed of section -->
+    <div class="mt-5 W-25 text-center">
+      <h1 class="px-3 heading-underline heading-underline-2">
+        Contact <span style="color: var(--primary)">US</span>
+      </h1>
+    </div>
+    <!--@ sections of about us section  -->
+    <div class="row align-items-center">
+      <!-- @ first section -->
+      <div class="col-md-6 order-lg-1  mb-lg-0 ">
+        <img class="fit-cover student me-3" style="height: 570px;"  src="Contact us-rafiki 1.png" alt="..." />
+      </div>
+      <!--@ seconed section  -->
+      <div class="col-md-6 text-center text-md-start mt-5  d-flex align-items-center " style="vertical-align: middle">
+        <div class="mx-auto ms-5">
+          <h1 class="mb-4 fw-bold fs-1" style="color: var(--primary);" >
+            Are you a teacher?
+          </h1>
+          <p style="font-size: 1.1rem;">We’re always looking for passionate educators <br>to join our platform and inspire students.</p>
+            <p class=""><strong class="fs-5"> Contact us today and be part of our learning community!</strong>  </p>
+
+
+          <div class="pb-3 mt-4 ms-3">
+            <button class="btn-pri w-50" type="submit">Join Us now </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--// ----------------------------------------------------------------------- -->
+<!--// -------------------------- End contact us --------------------------- -->
+<!--// ----------------------------------------------------------------------- -->
+<div class="justify-content-center  container mb-5">
+ 
+  <!-- End Contact us -->
+  <button class="floating-btn" (click)="togglePanel()">
+    {{ isPanelOpen ? 'Close Panel' : 'Open Panel' }}
+  </button>
+
+  <div *ngIf="isPanelOpen" class="panel">
+    <app-chatbotspesefic></app-chatbotspesefic>
+  </div>
+</div>

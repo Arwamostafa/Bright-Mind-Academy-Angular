@@ -1,0 +1,113 @@
+<div class="admin">
+  <!--! -------------------------- sTART side bar section --------------------------- -->
+  <!--! ----------------------------------------------------------------------- -->
+  <div class="sidebar" [class.show]="isSidebarOpen">
+    <!--SECTION sidebar button -->
+    <div class="" style="width: 400px">
+      <button class="toggle-btn" (click)="toggleSidebar()">
+        <div class="toggle-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </div>
+    <!--END ------------------------------- sidebar button ---------------------------------------- -->
+
+    <!--SECTION ----------------------   sidebar ----------------------- -->
+    <div class="big-content" [class.show]="isSidebarOpen">
+      <!--SECTION ------------------   header of side bar ------------------ -->
+      <div class="sidebar-header my-3">
+        <a class="logo d-flex align-items-center" href="#">
+          <div
+            class="logo-icon d-flex justify-content-center align-items-center"
+          >
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9ZM17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z"
+              />
+            </svg>
+          </div>
+          <div class="logo-text d-flex flex-column">
+            <span class="logo-main">Admin Dshboard</span>
+          </div>
+        </a>
+      </div>
+      <!--END ---------------------------------- header of side bar ------------------------------------- -->
+
+      <!--SECTION --------------------------- menu of sidebar --------------------------- -->
+      <div class="menu-section">
+        <div class="menu-label">Main Menu</div>
+        <!--SUBSECTION - show main menu  -->
+        <div
+          class="menu-item"
+          *ngFor="let item of mainMenuItems"
+          [class.open]="item.isOpen"
+        >
+          <!--NOTE - if item of menue have submenu object and user click on it toggle submenue  -->
+          <div
+            *ngIf="item.submenu"
+            class="menu-link"
+            (click)="toggleSubmenu(item)"
+            routerLinkActive="active"
+          >
+            <div class="menu-link-content">
+              <span class="menu-icon" *ngIf="item.icon.includes('fa-')">
+                <i [ngClass]="['fa-solid', item.icon]"></i>
+              </span>
+              <span class="menu-text">{{ item.text }}</span>
+            </div>
+            <i class="fas fa-chevron-right menu-arrow"></i>
+          </div>
+          <!--NOTE  - if item of menue dont have submenu object and user click on it navigate to section   -->
+          <a
+            *ngIf="!item.submenu"
+            [routerLink]="item.link"
+            class="menu-link"
+            [class.active]="item.isActive"
+            (click)="selectMenuItem(item) "
+            routerLinkActive="active"
+          >
+            <div class="menu-link-content">
+              <span class="menu-icon" *ngIf="item.icon.includes('fa-')">
+                <i [ngClass]="['fa-solid', item.icon]"></i>
+              </span>
+              <span class="menu-text">{{ item.text }}</span>
+            </div>
+          </a>
+
+          <!--NOTE  show submenu if user click on it-->
+          <div *ngIf="item.submenu" class="submenu">
+            <div class="submenu-item" *ngFor="let subItem of item.submenu">
+              <a
+                [routerLink]="subItem.link"
+                class="submenu-link"
+                routerLinkActive="active"
+              >
+                <span class="submenu-dot"></span>
+                {{ subItem.text }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--END --------------------------- menu of sidebar --------------------------- -->
+    </div>
+    <!--END ----------------------   sidebar ----------------------- -->
+  </div>
+
+  <!--! --------------------------end side bar section --------------------------- -->
+  <!--! ----------------------------------------------------------------------- -->
+
+  <!--# --------------------------start main content section --------------------------- -->
+  <!--# ----------------------------------------------------------------------- -->
+
+  <div class="main-content">
+   
+    <div class="con">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <!--# --------------------------end main content section --------------------------- -->
+  <!--# ----------------------------------------------------------------------- -->
+</div>

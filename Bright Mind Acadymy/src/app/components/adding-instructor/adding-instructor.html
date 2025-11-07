@@ -1,0 +1,309 @@
+@if(AddButton){
+ <div class="my-3">
+<button class="btn-pri w-25" (click)="toggleAddInstructorSection()"> <i class="fa-solid fa-user-plus mx-2" ></i> Add New Admin</button>
+</div>   
+}
+
+<!--SECTION add instructor Form Section  -->
+@if(OpenAddInstructorSection){
+<div class="form-section">
+    <!--SUBSECTION header of form  -->
+   <div class="form-header">
+             <button class="btn-close-panel" (click)="closeAddInstructorSection()">
+                <i class="fas fa-times"></i>
+            </button>
+                <div class="form-icon">
+             <i class="fa-solid fa-person-chalkboard"></i>              
+             </div>
+                <h2>Add New Instructor</h2>
+                <p>Fill in the details below to create a new Instructor</p>
+ </div>
+ <!--NOTE - Alert of errors when user submit from  -->
+ <div class="alert-section  mx-auto" style="width: 90%;">
+
+   <div *ngIf="message" 
+       class="alert mt-3 w-100 mx-auto" 
+       [ngClass]="isSuccess ? 'alert-success' : 'alert-danger'">
+    {{ message }}
+  
+@if(!isSuccess && errors && (errors | keyvalue).length > 0){
+ <ul class="mb-0">
+    @for (item of errors | keyvalue; track item) {
+ <li class="mt-2" *ngFor="let item of errors | keyvalue">
+        <strong>{{ item.key }}:</strong>
+        <ul>
+            @for (item of getErrorMessages(item.value); track $index) {
+                 <li >{{ item }}</li>
+                }
+         
+        </ul>
+      </li>
+  
+}
+   </ul>  
+ }
+     
+</div> 
+ </div>
+
+ <!--SUBSECTION - form  -->
+<form  [formGroup]="InstructorForm" (ngSubmit)="onSubmit()" >  
+<div class="section-title">
+ <i class="fas fa-info-circle " style="color: var(--primary-dark);"></i>
+     Basic Information
+    </div>
+    <div class="row">
+<div class="col-md-6 col-sm-12 my-2" >
+    <label for="firstName">First Name</label>
+    <input id="firstName" formControlName="firstName" />
+    <div *ngIf="InstructorForm.get('firstName')?.invalid && InstructorForm.get('firstName')?.touched">
+      <p style="color: brown;">First name is required and must be at least 3 characters</p>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-12 my-2">
+      <label for="lastName">Last Name</label>
+      <input id="lastName" formControlName="lastName" />
+      <div *ngIf="InstructorForm.get('lastName')?.invalid && InstructorForm.get('lastName')?.touched">
+          <p style="color: brown;">Lastt name is required and must be at least 3 characters</p>
+      </div>
+  </div> 
+  <div class="col-md-6 col-sm-12 my-2">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" />
+        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+            <div *ngIf="email?.errors?.['required']">
+                <p style="color: brown;">Email is required.</p>
+            </div>
+            <div *ngIf="email?.errors?.['email']">
+                <p style="color: brown;">Invalid email format</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 my-2">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" />
+    </div>
+    <div class="col-md-6 col-sm-12 my-2" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+        <div *ngIf="password?.errors?.['required']">
+            <p style="color: brown;">Password is required.</p>
+        </div>
+        <div *ngIf="password?.errors?.['minlength']">
+            <p style="color: brown;">Password must be at least 6 characters long.</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 my-2">
+        <label for="address">Address</label>
+        <input id="address" formControlName="address" />
+        <div *ngIf="address?.invalid && address?.touched">
+            <p style="color: brown;">Address is required and must be at least 10 characters</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 my-2">
+        <label for="phoneNumber">Phone Number</label>
+        <input id="phoneNumber" formControlName="phoneNumber" />
+        <div *ngIf="phoneNumber?.invalid && phoneNumber?.touched">
+            <p style="color: brown;">Phone is required and must be a valid 10-digit number</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 my-2">
+        <label for="gender">Gender</label>
+        <select name="gender" id="gender" formControlName = gender>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            </select>
+    </div>
+    <div class="col-md-12 col-sm-12 my-2">
+
+        
+                   <div class="row ">
+        <div class="col-md-6">
+
+                        <div class="section-title mt-2 border-0">
+                            <i class="fas fa-upload"></i>
+                            Upload Profile Image
+                        </div>
+        </div>
+        <div class="col-md-6">
+        <div class="me-auto">
+            <img *ngIf="oldImageUrl"
+                     [src]="oldImageUrl"
+                     alt="Instructor Image"
+                     style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;"
+                     (error)="onImageError($event)" >
+        </div>
+
+                <!-- <span *ngIf="!oldImageUrl" style="color: #999;">No Image</span> -->
+    </div>
+ </div>
+                        <label class="file-upload">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <div class="file-upload-text">Click to upload or drag and drop</div>
+                            <div class="file-upload-hint">PDF, DOC, DOCX (Max 5MB)</div>
+                            <input type="file" id="image"accept="image/*"formControlName="image"(change)="onImageFileChange($event)" accept=".png , .jpg , .webp"/>
+                            <div *ngIf="imageget?.invalid && imageget?.touched&& imageget==null">
+      <p style="color:brown;">Image is required</p>
+    </div>
+    <div *ngIf="invalidimageType">
+      <p class="error">Only image files are allowed</p>
+    </div>
+                        </label>
+                   
+        </div>
+       <!-- <div class="row ">
+        <div class="col-md-6">
+
+        <label for="image" class="mt-3" style="vertical-align: middle;">Image</label>
+        </div>
+
+    
+
+       </div> -->
+
+    <!-- <input type="file" id="image"
+           accept="image/*"
+           formControlName="image"
+           (change)="onImageFileChange($event)" />
+    <div *ngIf="imageget?.invalid && imageget?.touched&& imageget==null">
+      <p style="color:brown;">Image is required</p>
+    </div>
+    <div *ngIf="invalidimageType">
+      <p class="error">Only image files are allowed</p>
+    </div> -->
+  </div>
+  
+  
+
+    <button style="margin-top: 20px; width: 100%; background: var(--button-pri-color);" *ngIf="editId == null" type="submit" >Add</button>
+    <button style="margin-top: 20px; width: 100%; background: var(--button-pri-color);" *ngIf="editId != null" type="submit" >Update</button>
+</form>
+</div>
+}
+<!--SECTION instructors Table section  -->
+<div class="d-flex justify-content-center">
+
+<table class=" table" style="width: 85%;">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th style="text-align: center;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let instructor of instructors">
+            <td>{{ instructor.firstName }}</td>
+            <td>{{ instructor.lastName }}</td>
+            <td>{{ instructor.email }}</td>
+            <!-- <td>{{ instructor.address }}</td>
+            <td>{{ instructor.phoneNumber }}</td>
+            <td>{{instructor.gender}}</td> -->
+            <!-- <td><img *ngIf="instructor.ImageURL"
+                     [src]="instructor.ImageURL"
+                     alt="Instructor Image"
+                     style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;"
+                     (error)="onImageError($event)">
+                <span *ngIf="!instructor.ImageURL" style="color: #999;">No Image</span></td> -->
+            <!-- <td>{{ instructor.image }}</td> -->
+            <td class="actions" style="text-align: center;">
+                 <button (click)="toggleDetails(instructor)" class="btn-pri mx-2"><i class="fa-solid fa-eye"></i></button>
+                <button (click)="Update(instructor.id)" class="Update  mx-2"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button (click)="Delete(instructor.id)" class="mx-2 " style="background-color: brown"><i class="fa-solid fa-trash"></i></button>
+                <!-- <button (click)="Update(instructor.id)">Update</button>
+                <button (click)="Delete(instructor.id)">Delete</button> -->
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+<!--SECTION instructor Details section  -->
+@if(selectedUser){
+    <section  class=" mt-5 ">
+<div class="details-panel mt-5" >
+        <div class="panel-header">
+            <h2 class="panel-title">User Details</h2>
+            <button class="btn-close-panel" (click)="closeDetails()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+          <!--NOTE - name of instructor  -->
+        <div class="panel-hero">
+            <div class="hero-code" id="panelCode">{{selectedUser.firstName+ ' '+ selectedUser.lastName}}</div>
+        </div>
+        <!--NOTE - image of instructor  -->
+         <div class="image d-flex justify-content-center my-3">
+             <img class="rounded-circle " width="260px" height="250px"  [src]="selectedUser.ImageURL" [alt]="selectedUser.firstName">
+           </div>
+        <div class="details-section">
+            <div class="section-title">
+                <i class="fas fa-list"></i>
+                Admin Information
+            </div>
+<!--SUBSECTION - details of instractor  -->
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                  <div class="detail-item">
+                <div class="detail-left">
+                    <div class="detail-icon">
+                        <i class="fa-solid fa-id-card-clip"></i>
+                    </div>
+                    <div class="detail-info">
+                        <h6>ID</h6>
+                        <p id="panelStudents">{{selectedUser.id}}</p>
+                    </div>
+                </div>
+                   </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                <div class="detail-item">
+                    <div class="detail-left">
+                       <div class="detail-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                       </div>
+                       <div class="detail-info">
+                        <h6>Email</h6>
+                        <p id="panelStudents">{{selectedUser.email}}</p>
+                       </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12">
+                    <div class="detail-item">
+                <div class="detail-left">
+                    <div class="detail-icon">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div class="detail-info">
+                        <h6>Phone Number</h6>
+                        <p>{{selectedUser.phoneNumber}}</p>
+                    </div>
+                </div>
+            </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12">
+                    <div class="detail-item">
+                <div class="detail-left">
+                    <div class="detail-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div class="detail-info">
+                        <h6>Address</h6>
+                        <p>{{selectedUser.address}}</p>
+                    </div>
+                </div>
+            </div>
+                </div>
+                
+
+            </div>
+
+        </div>
+    </div>
+
+
+  
+</section>
+}
