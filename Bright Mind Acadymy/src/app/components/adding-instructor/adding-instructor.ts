@@ -215,6 +215,7 @@ private handleFormErrors(err: any): void {
       }
     }
   }
+
   //FUNCTION Compress image
    async compressFileToZip(file: File, zipFileName: string): Promise<Blob> {
   try {
@@ -290,15 +291,16 @@ onImageError(event: any): void {
 
 
 //FUNCTION Toggle Details Section
-     toggleDetails(user: IInstructor) {
+toggleDetails(user: IInstructor) {
       if (this.selectedUser && this.selectedUser.id === user.id) {
             this.selectedUser = null;
     } else {
         this.selectedUser = user; 
       }
     }
+
 //FUNCTION close detsils section
-      closeDetails(){
+   closeDetails(){
   this.selectedUser = null; 
 
   }

@@ -168,3 +168,6 @@
 .role-student{
     background-color: var(--primary);
 }
+.heading-underline::after{
+  z-index: 0;
+}

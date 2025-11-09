@@ -1,0 +1,114 @@
+.select-wrapper {
+  margin-bottom: 20px;
+}
+
+.select-wrapper label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.select-container {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 15px 45px 15px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  background:var(--button-pri-color);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  box-shadow: 0 4px 15px #764ba25f;
+  transition: all 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.custom-select:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px #764ba25f
+}
+
+.custom-select:focus {
+  box-shadow: 0 6px 25px #764ba25f;
+  transform: translateY(-2px);
+}
+
+/* السهم المخصص */
+.select-arrow {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid white;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+
+.select-container:hover .select-arrow {
+  transform: translateY(-40%);
+}
+
+/* تنسيق الخيارات */
+.custom-select option {
+  background: white;
+  color: #333;
+  padding: 15px;
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.custom-select option:hover {
+  background: var(--button-pri-color);
+  color: white;
+}
+
+.custom-select option:checked {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+  color: #667eea;
+  font-weight: 600;
+}
+
+.custom-select option[value=""] {
+  color: #999;
+}
+
+.info-box {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.info-box p {
+  margin: 0;
+  color: #667eea;
+  font-weight: 600;
+}
+
+.info-box span {
+  color: #764ba2;
+  font-size: 18px;
+}
+
+/* للمتصفحات المختلفة */
+.custom-select::-ms-expand {
+  display: none;
+}
+
+.alert{padding: 15px;margin-bottom: 20px;border-radius: 4px;color: #fff;text-transform: uppercase;font-size: 12px}.alert_info{background-color: #4285f4;border: 2px solid #4285f4}button.close{-webkit-appearance: none;padding: 0;cursor: pointer;background: 0 0;border: 0}.close{font-size: 20px;color: #fff;opacity: 0.9;font-weight: normal}.alert_success{background-color: #09c97f;border: 2px solid #09c97f}.alert_warning{background-color: #f8b15d;border: 2px solid #f8b15d}.alert_error{background-color: #f95668;border: 2px solid #f95668}.fade_info{background-color: #d9e6fb;border: 1px solid #4285f4}.fade_info .close{color: #4285f4}.fade_info strong{color: #4285f4}.fade_success{background-color: #c9ffe5;border: 1px solid #09c97f}.fade_success .close{color: #09c97f}.fade_success strong{color: #09c97f}.fade_warning{background-color: #fff0cc;border: 1px solid #f8b15d}.fade_warning .close{color: #f8b15d}.fade_warning strong{color: #f8b15d}.fade_error{background-color: #ffdbdb;border: 1px solid #f95668}.fade_error .close{color: #f95668}.fade_error strong{color: #f95668}

@@ -25,6 +25,9 @@ export class StudentService {
     });
   }
 
+  getAllStudent(): Observable<IStudent[]> {
+    return this._httpClient.get<IStudent[]>(`${environment.baseUrl}/student/GetAllStudents`);
+  }
   // getSubjectByName(name: string): Observable<IISubject> {
   //   return this._httpClient.get<IISubject>(`${environment.baseUrl}/subject/${name}`);
   // }
@@ -40,8 +43,13 @@ export class StudentService {
   // }
 
   // deleteSubject(id: number): Observable<string> {
-  //   return this._httpClient.delete<string>(`${environment.baseUrl}/subject/${id}`);
+  //   return this._httpClient.delete<string>(`${environment.baseUrl}/subject/delete/${id}`);
   // }
+
+  deleteStudent(id: number): Observable<string> {
+    let token: string | null = this._authUser.getToken();
+    return this._httpClient.delete<string>(`${environment.baseUrl}/student/delete/${id}`)
+  }
 
     addStudent(_student: IStudent): Observable<string> {
 

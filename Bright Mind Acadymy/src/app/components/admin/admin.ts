@@ -40,7 +40,7 @@ export class Admin {
       submenu: [
         { text: 'Admin managment', link: '/admin/addingAdmin' },
         { text: 'Instructor Managment', link: '/admin/addingInstructor' },
-        {text:'Student Managment',link:'/admin/addingInstructors'}
+        {text:'Student Managment',link:'/admin/StudentDashboard'}
       ]
     },
     {
