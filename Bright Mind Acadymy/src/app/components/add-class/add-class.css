@@ -187,6 +187,9 @@ tbody tr:hover {
     transform: skew(50px);
 
 }
+
+
+/*SECTION - card section  */
 .class-card {
             background: white;
             border-radius: 25px;
@@ -326,10 +329,8 @@ tbody tr:hover {
             transform: scale(1.15) rotate(90deg);
             box-shadow: 0 15px 50px rgba(245, 87, 108, 0.7);
         }
-.card-header-custom.green {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-        }
-        .card-header-custom.pink {
-            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 50%, #ffc3a0 100%);
 
-        }
+
+        /* .heading-underline::after{
+            z-index: 0;
+        } */

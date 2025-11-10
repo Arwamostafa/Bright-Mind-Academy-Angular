@@ -1,0 +1,111 @@
+<!--SECTION - Show class form  -->
+<div class="container shadow py-5 px-3  bg-white rounded-4 my-3">
+    <div class="w-25 ms-4 mb-4">
+        <div class=" W-25  row mb-3">
+        <div class="col-md-2"> 
+            <i class=" fa-solid fa-user-graduate fs-1 me-2 p-3 rounded-3" style="color: white; background: var(--button-pri-color);"></i>
+        </div>
+        <div class="col-md-8 mx-4">
+ <h1 class="px-3 heading-underline heading-underline-2  my-0" >
+          <span style="color: var(--primary)">Classes</span>
+      </h1>
+      <p>Manage ypur Educatinal Classes</p>
+        </div>
+     
+    </div>
+  </div>
+     
+
+@if(AddButton){
+  
+<!--SECTION - Classes  -->
+
+    <div class="row my-3 container">
+    @for (item of classes; track $index) {
+    <div class="col-md-6 col-lg-4 class-item">
+                <div class="class-card">
+                    <div class="card-header-custom " [ngClass]="{'purple':item.className=='Third Secondary','orange':item.className=='Second Secondary','blue':item.className=='First Secondary'}">
+                        <div class="card-icon">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                    </div>
+                    <div class="card-body-custom">
+                        <h3 class="class-name">{{item.className}}</h3>
+                        
+                        <div class="d-flex gap-2 my-3">
+                            <button class="btn btn-edit"  (click)="UpdateClass(item.classID)">
+                                <i class="fas fa-edit me-2"></i> Edit
+                            </button>
+                            <button class="btn btn-delete"  (click)="DeleteClass(item.classID)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        }
+</div>
+<!-- <table class="table table-striped shadow" style="width: 85%;">
+    <thead>
+        <tr>
+            <th class="text-center">Class Name</th>
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of classes">
+            <td class="text-center">{{item.className}}</td>
+            <td class="actions text-center">
+                <button class="text-center" (click)="UpdateClass(item.classID)"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button class="text-center" (click)="DeleteClass(item.classID)"><i class="fa-solid fa-trash"></i></button>
+            </td>
+        </tr>
+    </tbody>
+</table> -->
+<div class="my-3 d-flex justify-content-end">
+<button class="btn-pri w-25" (click)="toggleAddClassSection()"> <i class="fa-solid fa-user-plus mx-2" ></i> Add New Class</button>
+</div>
+}
+<!--SECTION - Class form  -->
+@if(OpenAddClassSection){
+<div class="form-section">
+<!--NOTE - Form  to add or update class  -->
+ <div class="form-header shadow">
+             <button class="btn-close-panel" (click)="closeAddClassSection()">
+                <i class="fas fa-times"></i>
+            </button>
+                <div class="form-icon">
+             <i class="fa-solid fa-person-chalkboard"></i>              
+             </div>
+                <h2>Add New Class</h2>
+                <p>Fill in the details below to create a new class</p>
+ </div>
+<!--NOTE - Form   -->
+  <form [formGroup]="ClassForm" (ngSubmit)="addClass()">
+<div class="section-title">
+ <i class="fas fa-info-circle " style="color: var(--primary-dark);"></i>
+     Basic Information
+    </div>
+    <div class="my-3">
+        <label id="className">class Name</label>
+        <input formControlName="className" placeholder="Class Name" />
+    </div>
+            <div *ngIf="className?.errors?.['required'] && className?.touched">
+              <p style="color: brown;">Name is required</p>
+            </div>
+            <div *ngIf="className?.errors?.['minlength'] && className?.touched">
+              <p style="color: brown;">Name must be at least 3 characters</p>
+            </div>
+
+    <button type="submit" style="width: 100%; background: var(--button-pri-color);" >Add class</button>
+</form>
+
+</div>
+
+}
+
+
+
+
+</div>

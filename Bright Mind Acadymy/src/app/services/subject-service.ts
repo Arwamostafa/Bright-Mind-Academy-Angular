@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { IISubject } from '../models/isubject';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { IStudent } from '../models/istudent';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +17,9 @@ export class SubjectService {
   getSubjectById(id: number): Observable<IISubject> {
     return this._httpClient.get<IISubject>(`${environment.baseUrl}/Subject/id/${id}`);
   }
-
+ getStudentsBySubjectId(id: number): Observable<IStudent[]> {
+    return this._httpClient.get<IStudent[]>(`${environment.baseUrl}/subject/GetStudentsBySubjectId/${id}`);
+  }
   getSubjectByName(name: string): Observable<IISubject> {
     return this._httpClient.get<IISubject>(`${environment.baseUrl}/subject/${name}`);
   }
