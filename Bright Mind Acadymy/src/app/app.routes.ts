@@ -25,6 +25,9 @@ import { instructorAuthGuardGuard } from './guards/instructor-auth-guard-guard';
 import { instructorOrStudentAuthGuardGuard } from './guards/instructor-or-student-auth-guard-guard';
 import { MainPageAdminDashboard } from './components/main-page-admin-dashboard/main-page-admin-dashboard';
 import { StudentDashboard } from './components/student-dashboard/student-dashboard';
+import { AddClass } from './components/add-class/add-class';
+
+
 
 export const routes: Routes = [
   {path:'', redirectTo: 'home', pathMatch:'full', title: 'Home'},
@@ -54,7 +57,9 @@ export const routes: Routes = [
       {path:'addingSubject', component: AddingSubject, title: 'Add Subject',canActivate:[adminAuthGuardGuard]},
      {path:'main-dashboard', component: MainPageAdminDashboard, title: 'Main dashboard',canActivate:[adminAuthGuardGuard]},
      {path:'StudentDashboard', component:StudentDashboard , title:'student section',canActivate:[adminAuthGuardGuard]},
-      {path:'**', component: NotFound, title: 'Not Found'}
+     {path:'AddClass',component:AddClass , title:'Add Class',canActivate:[adminAuthGuardGuard ]},
+  {path:'**', component: NotFound, title: 'Not Found'}
+
     ]
   },
   {path: 'courseDashboard/:id', component: CourseDashboard, title: 'Course',canActivate:[instructorOrStudentAuthGuardGuard] },

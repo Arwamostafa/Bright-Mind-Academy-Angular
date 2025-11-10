@@ -49,7 +49,7 @@ export class Admin {
       isOpen: false,
       submenu: [
         { text: 'Track Managment', link: '/admin/addingClassTrack' },
-        { text: 'Class Managment', link: '/admin/addingClassTrack' },
+        { text: 'Class Managment', link: '/admin/AddClass' },
       ]
     },
     {

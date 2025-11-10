@@ -6,7 +6,6 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { IClass } from '../../models/iclass.ts';
 import { ITrack } from '../../models/itrack.ts';
-import { ClassService } from '../../services/class-service.js';
 import { TrackService } from '../../services/track-service.js';
 
 @Component({
@@ -26,8 +25,9 @@ export class AddingClassTrack implements OnInit {
   editTrackId: number | null = null;
   tracks!: ITrack[] ;
   TrackForm:FormGroup;
-
-  constructor(private _classService: ClassService, private _trackService: TrackService){
+  OpenAddTrackSection:boolean=false
+AddButton:boolean=true
+  constructor( private _trackService: TrackService){
     this.ClassForm= new FormGroup({
       className: new FormControl('', [Validators.required, Validators.minLength(3)])
     });
@@ -36,22 +36,13 @@ export class AddingClassTrack implements OnInit {
       trackName: new FormControl('', [Validators.required, Validators.minLength(3)])
     });
   }
-  get className(){return this.ClassForm.get('className')}
+
 
   ngOnInit(){
     this.loading();
   }
 
   loading(){
-       this._classService.getAllClasses().subscribe({
-      next: (next) => {
-        // console.log(next);
-
-        this.classes = next
-      }
-    });
-
-
 
     this._trackService.getAllTracks().subscribe({
       next: (data) => {
@@ -62,81 +53,10 @@ export class AddingClassTrack implements OnInit {
     })
   }
 
-  addClass() {
-    if (this.ClassForm.valid) {
-      const formData = this.ClassForm.value;
-
-      if (this.editClassId !== null) {
-        // Update existing class
-        const index = this.classes.findIndex(i => i.classID === this.editClassId);
-        if (index > -1) {
-          console.log(formData);
-          this._classService.updateClass(this.editClassId, formData).subscribe({
-            next: (data)=>{
-              console.log(data);
-
-            },
-            error: (err) => {
-              console.error("Failed to uodate class:", err)
-            }
-          })
-          this.loading();
-          // this.classes[index] = { id: this.editClassId, ...formData };
-        }
-        this.editClassId = null; // Exit edit mode
-      } else {
-        // Add new class
-        // const newId = this.classes.length > 0 ? Math.max(...this.classes.map(i => i.classID)) + 1 : 1;
-        // this.classes.push({ id: newId, ...formData });
-
-        this._classService.addClass(formData).subscribe({
-          next : (data) => {
-
-            console.log(data);
-          },
-          error: (err) => {
-          console.error("Failed to add class:", err)
-        }
-        })
-        this.loading();
-        this.ClassForm.reset()
-      }
-    }
-  }
-  classByIndex(index: number): number {
-    return index;
-  }
-  DeleteClass(id: number) {
-    // this.classes = this.classes.filter(classes => classes.classID !== id);
-    // If the deleted unit is being edited, reset the form
-    this._classService.deleteClass(id).subscribe({
-          next : (data) => {
-
-            console.log(data);
-          },
-          error: (err) => {
-          console.error("Failed to delete class:", err)
-        }
-    });
-    this.loading();
-    if (this.editClassId === id) {
-      this.ClassForm.reset();
-      this.editClassId = null;
-    }
-  }
-  UpdateClass(id: number) {
-    const classToUpdate = this.classes.find(classes=> classes.classID === id);
-    if (classToUpdate) {
-      this.ClassForm.patchValue(classToUpdate);
-      this.editClassId = id;  // Set edit mode
-    }
-  }
+  
 
 
 // track
-
-
-
 
   get trackName(){return this.TrackForm.get('trackName')}
 addTrack() {
@@ -151,13 +71,21 @@ addTrack() {
           this._trackService.updateTrack(this.editTrackId, formData).subscribe({
             next: (data)=>{
               console.log(data);
+                           this.ngOnInit();
 
             },
             error: (err) => {
               console.error("Failed to update track:", err)
             }
+
           })
+         this.loading();
+
           this.ngOnInit();
+           this.TrackForm.reset()
+           this.OpenAddTrackSection=false;
+            this.AddButton=true
+
         }
         this.editTrackId = null; // Exit edit mode
       } else {
@@ -169,12 +97,16 @@ addTrack() {
           next : (data) => {
 
             console.log(data);
+                    this.loading();
+
           },
           error: (err) => {
           console.error("Failed to add track:", err)
         }
         })
         this.ngOnInit();
+this.OpenAddTrackSection=false;
+            this.AddButton=true
         this.TrackForm.reset()
       }
     }
@@ -207,6 +139,22 @@ addTrack() {
     if (trackToUpdate) {
       this.TrackForm.patchValue(trackToUpdate);
       this.editTrackId = id;  // Set edit mode
+      this.OpenAddTrackSection=true;
+      this.AddButton=false
     }
+  }
+   toggleAddClassSection() {
+    if (this.OpenAddTrackSection) {
+          this.OpenAddTrackSection = false;
+          this.AddButton=true
+  } else {
+      this.OpenAddTrackSection= true; 
+      this.AddButton=false
+    }
+  }
+  //FUNCTION  close add Instructor section
+ closeAddClassSection(){
+  this.OpenAddTrackSection = false; 
+this.AddButton=true
   }
 }

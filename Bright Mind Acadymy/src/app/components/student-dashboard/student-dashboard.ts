@@ -14,6 +14,8 @@ interface SelectOption {
 
 @Component({
   selector: 'app-student-dashboard',
+  standalone: true,
+  providers: [StudentService, SubjectService],
   imports: [CommonModule , FormsModule],
   templateUrl: './student-dashboard.html',
   styleUrl: './student-dashboard.css'
@@ -43,7 +45,8 @@ constructor(private _StudentService:StudentService , private _subjectService:Sub
 ngOnInit(): void {
   this._StudentService.getAllStudent().subscribe({
     next:(data)=>{
-      this.Students=data;
+      this.studenstOfSubejct=data;
+
       console.log(data);
     },
     error:(err)=>{console.log(err);}

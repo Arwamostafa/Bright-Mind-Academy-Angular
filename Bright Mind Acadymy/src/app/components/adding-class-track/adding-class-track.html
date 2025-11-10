@@ -1,54 +1,48 @@
-<div class="_class">
-  <form [formGroup]="ClassForm" (ngSubmit)="addClass()">
-    <h1 style="text-align: center; color: #0066cc; margin: 10px;">Add Class</h1>
-
-    <div>
-        <label id="className">class Name:</label>
-        <input formControlName="className" placeholder="Class Name" />
-    </div>
-            <div *ngIf="className?.errors?.['required'] && className?.touched">
-              <p style="color: brown;">Name is required</p>
-            </div>
-            <div *ngIf="className?.errors?.['minlength'] && className?.touched">
-              <p style="color: brown;">Name must be at least 3 characters</p>
-            </div>
-
-    <button type="submit" style="width: 100%; background-color: #0066cc;" >Add class</button>
-</form>
-<table>
-    <thead>
-        <tr>
-            <th>Class Name</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of classes">
-            <td>{{item.className}}</td>
-            <td class="actions">
-                <button (click)="UpdateClass(item.classID)">Update</button>
-                <button (click)="DeleteClass(item.classID)">Delete</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
-</div>
-
-<!-- track -->
-
-<div class="track">
-  <form [formGroup]="TrackForm" (ngSubmit)="addTrack()">
-    <h1 style="text-align: center; color: #0066cc; margin: 10px;">Add Track</h1>
-    <div>
-        <label id="trackName">Track Name:</label>
-        <input formControlName="trackName" placeholder="Track Name" />
-    </div>
-            <div *ngIf="trackName?.invalid && trackName?.touched">
-            <p style="color: brown;">Name is required and must be at least 3 characters</p>
+<div class="container bg-white shadow py-5 px-2 rounded-4 my-3">
+<div class="w-25 ms-4 mb-4">
+        <div class=" W-25  row mb-3">
+        <div class="col-md-2"> 
+            <i class=" fa-solid fa-user-graduate fs-1 me-2 p-3 rounded-3" style="color: white; background: var(--button-pri-color);"></i>
         </div>
-    <button type="submit" style="width: 100%; background-color: #0066cc;">Add Track</button>
-</form>
-<table>
+        <div class="col-md-8 mx-4">
+ <h1 class="px-3 heading-underline heading-underline-2  my-0" >
+          <span style="color: var(--primary)">Trackes</span>
+      </h1>
+      <p>Manage your Educatinal Tracks</p>
+        </div>
+     
+    </div>
+  </div>
+
+@if(AddButton){
+  <div class="row my-3 container">
+    @for (item of tracks; track $index) {
+    <div class="col-md-6 col-lg-4 class-item">
+                <div class="class-card">
+                    <div class="card-header-custom " [ngClass]="{'purple':item.trackName=='Science – Math','orange':item.trackName=='Science – Bio','blue':item.trackName=='Literature ','green':item.trackName=='Science','pink':item.trackName=='General'}">
+                        <div class="card-icon">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                    </div>
+                    <div class="card-body-custom">
+                        <h3 class="class-name">{{item.trackName}}</h3>
+                        
+                        <div class="d-flex gap-2 my-3">
+                            <button class="btn btn-edit"  (click)="UpdateTrack(item.trackID)">
+                                <i class="fas fa-edit me-2"></i> Edit
+                            </button>
+                            <button class="btn btn-delete"  (click)="DeleteTrack(item.trackID)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        }
+</div>
+  <!-- <div class="d-flex justify-content-center align-items-center">
+<table class="table table-striped table-responsive  " style="width: 85%;">
     <thead>
         <tr>
             <th>Track Name</th>
@@ -59,10 +53,51 @@
         <tr *ngFor="let track of tracks">
             <td>{{track.trackName}}</td>
             <td class="actions">
-                <button (click)="UpdateTrack(track.trackID)">Update</button>
-                <button (click)="DeleteTrack(track.trackID)">Delete</button>
+                <button (click)="UpdateTrack(track.trackID)"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button (click)="DeleteTrack(track.trackID)"><i class="fa-solid fa-trash"></i></button>
             </td>
         </tr>
     </tbody>
 </table>
+
+</div> -->
+ <div class="my-3 d-flex justify-content-end">
+<button class="btn-pri w-25" (click)="toggleAddClassSection()"> <i class="fa-solid fa-user-plus mx-2" ></i> Add New Track</button>
+</div>
+}
+@if(OpenAddTrackSection){
+
+<!-- track -->
+<div class="form-section">
+<!--NOTE - form header  -->
+<div class="form-header">
+             <button class="btn-close-panel" (click)="closeAddClassSection()">
+                <i class="fas fa-times"></i>
+            </button>
+                <div class="form-icon">
+             <i class="fa-solid fa-person-chalkboard"></i>              
+             </div>
+                <h2>Add New Track</h2>
+                <p>Fill in the details below to create a new Track</p>
+ </div>
+ <!--NOTE - form  -->
+<div class="track">
+  <form [formGroup]="TrackForm" (ngSubmit)="addTrack()">
+<div class="section-title">
+ <i class="fas fa-info-circle " style="color: var(--primary-dark);"></i>
+     Basic Information
+    </div>    <div class="my-5">
+        <label id="trackName">Track Name:</label>
+        <input formControlName="trackName" placeholder="Track Name" />
+    </div>
+            <div *ngIf="trackName?.invalid && trackName?.touched">
+            <p style="color: brown;">Name is required and must be at least 3 characters</p>
+        </div>
+    <button type="submit" style="width: 100%; background: var(--button-pri-color);">Add Track</button>
+</form>
+</div>
+</div>
+}
+<!--SECTION - Tracks table -->
+
 </div>
