@@ -7,6 +7,8 @@ export interface IUser {
   Address?:string
   nationalid?:bigint
   roles?:string[]
-    age?:number
+   age?:number
+
+
 
 }

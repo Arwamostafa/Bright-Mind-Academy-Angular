@@ -15,8 +15,8 @@ interface SelectOption {
 @Component({
   selector: 'app-student-dashboard',
   standalone: true,
-  imports: [CommonModule , FormsModule],
   providers: [StudentService, SubjectService],
+  imports: [CommonModule , FormsModule],
   templateUrl: './student-dashboard.html',
   styleUrl: './student-dashboard.css'
 })
@@ -46,6 +46,7 @@ ngOnInit(): void {
   this._StudentService.getAllStudent().subscribe({
     next:(data)=>{
       this.studenstOfSubejct=data;
+
       console.log(data);
     },
     error:(err)=>{console.log(err);}
@@ -86,7 +87,6 @@ closeDetails(){
   }
 
 GetStudentsBtSubjectId(value: any){
-  
   if(value.target.value==="All"){
       this._StudentService.getAllStudent().subscribe({
     next:(data)=>{

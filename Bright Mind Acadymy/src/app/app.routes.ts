@@ -28,6 +28,7 @@ import { StudentDashboard } from './components/student-dashboard/student-dashboa
 import { AddClass } from './components/add-class/add-class';
 
 
+
 export const routes: Routes = [
   {path:'', redirectTo: 'home', pathMatch:'full', title: 'Home'},
   {path:'home', component: Home, title: 'Home'},
@@ -55,10 +56,10 @@ export const routes: Routes = [
       {path:'addingClassTrack', component: AddingClassTrack, title: 'Add Class',canActivate:[adminAuthGuardGuard]},
       {path:'addingSubject', component: AddingSubject, title: 'Add Subject',canActivate:[adminAuthGuardGuard]},
      {path:'main-dashboard', component: MainPageAdminDashboard, title: 'Main dashboard',canActivate:[adminAuthGuardGuard]},
-
      {path:'StudentDashboard', component:StudentDashboard , title:'student section',canActivate:[adminAuthGuardGuard]},
      {path:'AddClass',component:AddClass , title:'Add Class',canActivate:[adminAuthGuardGuard ]},
   {path:'**', component: NotFound, title: 'Not Found'}
+
     ]
   },
   {path: 'courseDashboard/:id', component: CourseDashboard, title: 'Course',canActivate:[instructorOrStudentAuthGuardGuard] },
